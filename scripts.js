@@ -153,8 +153,14 @@ function showCalendar(month, year) {
 }
 
 function myFunction(id) {
+
+    if(! $('#drop' + id).hasClass('show')) {
+        $('.dropdown-content.show').removeClass('show');
+    }
+
+    $('#drop' + id).addClass('show');
     // alert(id);
-    document.getElementById('drop'+ id).classList.toggle("show");
+    // document.getElementById('drop'+ id).classList.toggle("show");
   }
 
   function setNoFault(id) {
@@ -170,6 +176,14 @@ function myFunction(id) {
 
 window.onclick = function(event) {
     if (!event.target.matches('td')) {
+        $('.dropdown-content.show').removeClass('show');
+    }
+}
+
+window.onclick = function(event) {
+    if (event.target.matches('td')) {
+    }
+    else {
         $('.dropdown-content.show').removeClass('show');
     }
 }
