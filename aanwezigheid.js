@@ -66,8 +66,18 @@ function drawTable (month, year) {
             cell.appendChild(cellText);
             mother.after(cell);
 
-            if(localStorage.getItem(cell.getAttribute("id")) !== null) {
-                cell.setAttribute('class', 'vrij');
+            var indLocStrg = localStorage.getItem(cell.getAttribute("id"));
+
+            if(indLocStrg !== null) {
+                if (indLocStrg == '1') {
+                    cell.setAttribute('class', 'half-ochtend');
+                }
+                else if(indLocStrg == '2') {
+                    cell.setAttribute('class', 'half-middag')
+                }
+                else {
+                    cell.setAttribute('class', 'vrij');
+                }
             }
             else {
                 cell.setAttribute('class', 'aanwezig');
@@ -106,6 +116,23 @@ function drawTable (month, year) {
             // link.onclick = setFault(String(cell.id));
             link.innerText = "Vrij boeken";
             drdList.appendChild(link);
+            
+            var link = document.createElement('a');
+            link.setAttribute('href', '#');
+            link.setAttribute('class', 'half-ochtend');
+            link.setAttribute('onClick', 'setHalfOchtend("'+cell.getAttribute("id")+'")');
+            // link.onclick = setNoFault(String(cell.id));
+            link.innerText = "Ochtend vrij";
+            drdList.appendChild(link);
+
+            var link = document.createElement('a');
+            link.setAttribute('href', '#');
+            link.setAttribute('class', 'half-middag');
+            link.setAttribute('onClick', 'setHalfMiddag("'+cell.getAttribute("id")+'")');
+            // link.onclick = setNoFault(String(cell.id));
+            link.innerText = "Middag vrij";
+            drdList.appendChild(link);
+
             var link = document.createElement('a');
             link.setAttribute('href', '#');
             link.setAttribute('class', 'aanwezig');
@@ -139,7 +166,7 @@ function showDropList(id) {
 function setNoFault(id) {
     console.log('nofault');
     // alert(String(id));
-
+ 
       localStorage.removeItem(id);
       document.getElementById(id).setAttribute('class', 'aanwezig');
     
@@ -149,6 +176,18 @@ function setFault(id) {
     // alert(String(id));
     localStorage.setItem(id, '');
     document.getElementById(id).setAttribute('class', 'vrij');
+}
+
+function setHalfOchtend(id) {
+    // alert(String(id));
+    localStorage.setItem(id, '1');
+    document.getElementById(id).setAttribute('class', 'half-ochtend');
+}
+
+function setHalfMiddag(id) {
+    // alert(String(id));
+    localStorage.setItem(id, '2');
+    document.getElementById(id).setAttribute('class', 'half-middag');
 }
 
 //   window.onclick = function(event) {

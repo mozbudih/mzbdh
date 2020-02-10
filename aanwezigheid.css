@@ -48,6 +48,14 @@
       background-color: transparent;
   }
 
+  .half-ochtend{
+    background-color: #FF4500; font-weight: bold; font-size: 16px;
+  }
+
+  .half-middag{
+    background-color: #00FA9A; font-weight: bold; font-size: 16px;
+  }
+
   /* .table th {
       padding: .37rem;
   } 
@@ -97,9 +105,9 @@
   
   .table td,
   .table th {
-    padding: 0.1rem;
+    padding: 0.25rem;
     border-bottom-color: #ccc;
-    font-size: 0.75rem
+    font-size: 0.85rem
   }
   
   .card .card-header {
