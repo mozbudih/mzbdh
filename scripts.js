@@ -72,6 +72,8 @@ function showCalendar(month, year) {
                 let cell = document.createElement("td");
                 cell.setAttribute('style', 'height: 10vh');
 
+                debugger;
+
                 // cell.setAttribute('id', String(year).concat(String(month), String(date)));
                 idString = String(year) + String(month) + String(date);
                 // idString="blabla";
