@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Technical Services Vergaderingsbord</title>
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="main.css">		
+		<link rel="stylesheet" type="text/css" href="aanwezigheid.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-md">
+			<a class="navbar-brand" href="#">
+					<img class = "img-responsive" src = "GE-LOGO.png" alt = "GE LOGO">
+			</a>
+			<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="main-navigation">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Overzicht</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="security.html">Safety</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="quality.html">Quality</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="delivery.html">Delivery</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="planning.html">TS Weekly Planning</a>
+					</li>
+					<li>
+						<a class = "nav-link" href = "longterm.html">Long-term Acties</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="agenda.html">TS Agenda</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="aanwezigheid.html">People</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="dosis.html">Dosis Overzicht</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class = "container-fluid my-2">
+			<div class = "card ">
+				<div class="card-header form-inline">
+					
+					<h3 style = "padding: 0rem 1rem" id="monthAndYear"></h3>
+
+					<button style = "margin: 0rem 0.5rem" class="btn btn-outline-primary" id="previous" onclick="previous()">Previous</button>
+		
+					<button style = "margin: 0rem 0.5rem" class="btn btn-outline-primary" id="next" onclick="next()">Next</button>
+
+					<!-- <button class="btn btn-outline-success ml-auto" onclick="exportJson()">
+						<a id="btn-export" href="" style="pointer-events: none;">
+							Export JSON
+						</a>
+					</button> -->
+				</div>
+				<div class="card-body">
+					<table class = "table table-bordered table-responsive-md">
+						<tbody>
+							<tr>
+								<td id="dateRow" colspan = "2"></td>
+							</tr>
+							<tr>
+								<th rowspan = "8">Maintenance</th>
+								<th id = "HvB">HvB</th>
+								
+							</tr>
+							<tr>
+								<th id = "EvdW">EvdW</th>
+							</tr>
+							<tr>
+								<th id = "CdK">CdK</th>
+							</tr>
+							<tr>
+								<th id = "JoSe">JoSe</th>
+							</tr>
+
+							<tr>
+								<th id = "JSi">JSi </th>
+							</tr>
+
+							<tr>
+								<th id = "RdBr">RdBr</th>
+							</tr>
+
+							<tr>
+								<th id = "AnS">AnS</th>
+							</tr>
+
+							<tr>
+								<th id = "MBH">MBH</th>
+							</tr>
+
+							<tr>
+								<th rowspan = "4">Validation</th>
+								<th id = "DH">DH</th>
+								
+							</tr>
+							<tr>
+								<th id = "PV">PV</th>
+							</tr>
+							<tr>
+								<th id = "JvB">JvB</th>
+							</tr>
+							<tr>
+								<th id = "KHu">KHu</th>
+							</tr>
+
+							<tr>
+								<th rowspan = "9">Projects/Engineering</th>
+								<th id = "JCo">JCo</th>
+							</tr>
+							<tr>
+								<th id = "GL">GL</th>
+							</tr>
+							<tr>
+								<th id = "NvS">NvS</th>
+							</tr>
+							<tr>
+								<th id = "AW">AW</th>
+							</tr>
+
+							<tr>
+								<th id = "HR">HR</th>
+							</tr>
+
+							<tr>
+								<th id = "HP">HP</th>
+							</tr>
+
+							<tr>
+								<th id = "DvdZ">DvdZ</th>
+							</tr>
+
+							<tr>
+								<th id = "RRi">RRi</th>
+							</tr>
+							<tr>
+								<th id = "PMo">PMo</th>
+							</tr>
+						</tbody>
+						
+					</table>
+				</div>
+			</div> 
+		</div>
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="aanwezigheid.js"></script>
+	</body>
+</html>

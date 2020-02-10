@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Technical Services Vergaderingsbord</title>
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="delivery.css">
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+	    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+	</head>
+	<body>
+      <!-- TUTORIAL: https://www.youtube.com/watch?v=CuXl6D4e9_k -->
+      <nav class="navbar navbar-expand-md">
+        <a class="navbar-brand" href="#">
+                <img class = "img-responsive" src = "GE-LOGO.png" alt = "GE LOGO">
+        </a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-navigation">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Overzicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="security.html">Safety</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="quality.html">Quality</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="delivery.html">Delivery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="planning.html">TS Weekly Planning</a>
+                </li>
+                <li>
+                    <a class = "nav-link" href = "longterm.html">Long-term Acties</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agenda.html">TS Agenda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aanwezigheid.html">People</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dosis.html">Dosis Overzicht</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+        
+        <div class = "container-fluid my-2">
+            <div class = "card">
+                <div class="card-header form-inline">
+                    <h3 style = "padding: 0rem 1rem" class="card-header" id="monthAndYear"></h3>
+  
+                    <button style = "margin: 0rem 0.5rem" class="btn btn-outline-primary" id="previous" onclick="previous()">Previous</button>
+        
+                    <button style = "margin: 0rem 0.5rem" class="btn btn-outline-primary" id="next" onclick="next()">Next</button>
+
+                    <button class="btn btn-outline-success ml-auto" onclick="exportJson()">
+                        <a id="btn-export" href="" style="pointer-events: none;">
+                            Export JSON
+                        </a>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table class = "table table-bordered table-responsive-md">
+                        <tbody>
+                                <tr>
+                                    <td id="dateRow" colspan = "3"></td>
+                                </tr>
+                                <tr>
+                                    <th rowspan = "7">Targets</th>
+                                    <th rowspan = "4">Jodium</th>
+                
+                                    <th id = "C3A">C3A</th>
+                                    
+                                </tr>
+                                <tr>
+                                    <th id = "C3B">C3B</th>
+                                </tr>
+                                <tr>
+                                    <th id = "C4A">C4A</th>
+                                </tr>
+                                <tr>
+                                    <th id = "C4B">C4B</th>
+                                </tr>
+                                <tr>
+                                    <th rowspan = "2">Fluor</th>
+            
+                                    <th id = "F1">1</th>
+                                </tr>
+                                <tr>
+                                    <th id = "F2">2</th>
+                                </tr>
+                                <tr>
+                                    <th id = "Krypton" colspan = "2">Krypton</th>
+                                </tr>
+            
+                                
+                                <tr>
+                                    <th rowspan = "4">Autoclaaf</th>
+                                    <th  id = "ACDoorgeef" colspan = "2">Doorgeef</th>
+                                </tr>
+                                <tr>
+                                    <th id = "ACEnkel" colspan = "2">Enkeldeurs</th>
+                                </tr>
+                                <tr>
+                                    <th id = "ACComecer" colspan = "2">Comecer</th>
+                                </tr>
+                                <tr>
+                                    <th id = "ACVonGahlen" colspan = "2">FDG Von Gahlen</th>
+                                </tr>
+            
+                                
+                                <tr>
+                                    <th rowspan = "5">Jodium Prod.</th>
+                                    <th rowspan = "4">DatSCAN</th>
+                                    <th id = "DS1">1</th>
+                                </tr>
+                                <tr>
+                                    <th id = "DS2">2</th>
+                                </tr>
+                                <tr>
+                                    <th id = "DS3">3</th>
+                                </tr>
+                                <tr>
+                                    <th id = "DS4">4</th>
+                                </tr>
+                                <tr>
+                                    <th id = "OvrJod"colspan = "2">Overige Jodium</th>
+                                </tr>
+            
+                                <tr>
+                                    <th rowspan = "3">Isolatoren</th>
+                                    <th id = "Iso1" colspan = "2">1</th>
+                                </tr>
+                                <tr>
+                                    <th id = "Iso2" colspan = "2">2</th>
+                                </tr>
+                                <tr>
+                                    <th id = "IsoSter" colspan = "2">Steritest</th>
+                                </tr>
+            
+                                <tr>
+                                    <th rowspan = "4">Hotcells</th>
+                                    <th id = "CU" colspan = "2">CU</th>
+                                </tr>
+                                <tr>
+                                    <th id = "HCKrypton" colspan = "2">Krypton</th>
+                                </tr>
+                                <tr>
+                                    <th id = "HCVonGahlen" colspan = "2">FDG Von Gahlen</th>
+                                </tr>
+                                <tr>
+                                    <th id = "HCComecer" colspan = "2">Fluor Comecer</th>
+                                </tr>
+            
+                                <tr>
+                                    <th rowspan = "2">Facilities</th>
+                                    <th id = "FaclHVAC" colspan = "2">HVAC</th>
+                                </tr>
+                                <tr>
+                                    <th id = "FaclOverige" colspan = "2">Overige</th>
+                                </tr>
+            
+                                <tr>
+                                    <th rowspan = "2">Overige</th>
+                                    <th id = "QC" colspan = "2">QC</th>
+                                </tr>
+                                <tr>
+                                    <th id = "IV" colspan = "2">I&V</th>
+                                </tr>
+                                
+                            
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div> 
+        </div>
+  <!--<button name="jump" onclick="jump()">Go</button>-->
+<script src="delivery.js"></script>
+
+<!-- Optional JavaScript for bootstrap -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+		
+	<script type = "text/javascript" src = "https://res.cloudinary.com/dxfq3iotg/raw/upload/v1567487539/jquery.tabledit.js"> </script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</body>
+</html>
