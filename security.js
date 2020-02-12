@@ -136,7 +136,7 @@ function showCalendar(month, year) {
                 let cellText = document.createTextNode(date);
 
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.classList.add("bg-info");
+                    cell.classList.add("today");
                 } // color today's date
                 cell.appendChild(cellText);
                 cell.appendChild(drdList);

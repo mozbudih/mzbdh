@@ -67,7 +67,10 @@ function drawTable (month, year) {
             mother.after(cell);
 
             var indLocStrg = localStorage.getItem(cell.getAttribute("id"));
-
+            let dayDate = new Date(year,month,date).getDay();
+            if (dayDate == 6 || dayDate == 0)     {
+                cell.setAttribute('class', 'weekend');
+            }
             if(indLocStrg !== null) {
                 if (indLocStrg == '1') {
                     cell.setAttribute('class', 'half-ochtend');
@@ -79,9 +82,9 @@ function drawTable (month, year) {
                     cell.setAttribute('class', 'vrij');
                 }
             }
-            else {
-                cell.setAttribute('class', 'aanwezig');
-            }
+            // else {
+            //     cell.setAttribute('class', 'aanwezig');
+            // }
 
             // if (year <= today.getFullYear() && month <= today.getMonth() && date < today.getDate()) {
             //     // cell.setAttribute('onClick', 'showDropList("'+cell.getAttribute("id")+'")');

@@ -32,7 +32,9 @@ function jump() {
     drawTable(currentMonth, currentYear);
 }
 
-function drawTable (month, year) {
+function drawTable (month, year) {  
+    // alert(today.getDay());
+    // alert(today);
 
     // console.log("Month: " + month);
     // Remove shits
@@ -42,6 +44,7 @@ function drawTable (month, year) {
 
     // alert(String(year) + String(month));
     let daysInMonth = 32 - new Date(year, month, 32).getDate();
+    // alert(daysInMonth);
 
     monthAndYear.innerHTML = months[month] + " " + year;
     // selectYear.value = year;
@@ -64,6 +67,11 @@ function drawTable (month, year) {
         $('#' + item).nextAll().remove();
 
         for (date = daysInMonth; date >= 1; date--) {
+            // alert(d);
+
+            // if(date.getDate)
+            // console.log(date.getDate());
+            // date.getDate();
            
             // Remove things
 
@@ -77,6 +85,7 @@ function drawTable (month, year) {
             cell.appendChild(cellText);
             mother.after(cell);
 
+          
             if (year <= today.getFullYear() && month <= today.getMonth() && date < today.getDate()) {
                 cell.setAttribute('onClick', 'showDropList("'+cell.getAttribute("id")+'")');
 
@@ -138,21 +147,15 @@ function drawTable (month, year) {
             var btnSubmit = document.createElement('BUTTON');
             btnSubmit.setAttribute('class', 'btn btn-outline-primary');
             btnSubmit.innerHTML = "SUBMIT";
-            btnSubmit.setAttribute('onclick', 'newFunc("'+ cell.getAttribute('id') +'")');
+            btnSubmit.setAttribute('onclick', 'submitMelding("'+ cell.getAttribute('id') +'")');
             drdList.appendChild(btnSubmit);
-            
-
-
 
             cell.appendChild(drdList);
-
-
         }
     });
-
 }
 
-function newFunc(id) {
+function submitMelding(id) {
     var newText = document.getElementById('text' + id).value;
     localStorage.setItem(id, newText);
     drawTable(currentMonth, currentYear);
@@ -200,26 +203,26 @@ window.onclick = function(event) {
     }
 }
 
-var delay;
-var longpress = 800;
+// var delay;
+// var longpress = 800;
 
-window.addEventListener('mousedown', function (e) {
-    var _this = this;
-    delay = setTimeout(check, longpress);
+// window.addEventListener('mousedown', function (e) {
+//     var _this = this;
+//     delay = setTimeout(check, longpress);
     
-    function check() {
-        // _this.classList.add('is-selected');
-        alert(localStorage.getItem('DS1202014'))
-        // alert("LONGPRESSED");
-    }
+//     function check() {
+//         // _this.classList.add('is-selected');
+//         alert(localStorage.getItem('DS1202014'))
+//         // alert("LONGPRESSED");
+//     }
     
-  }, true);
+//   }, true);
   
-  window.addEventListener('mouseup', function (e) {
-    // On mouse up, we know it is no longer a longpress
-    clearTimeout(delay);
-  });
+//   window.addEventListener('mouseup', function (e) {
+//     // On mouse up, we know it is no longer a longpress
+//     clearTimeout(delay);
+//   });
   
-  window.addEventListener('mouseout', function (e) {
-    clearTimeout(delay);
-  });
+//   window.addEventListener('mouseout', function (e) {
+//     clearTimeout(delay);
+//   });

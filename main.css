@@ -35,9 +35,11 @@ body {
     max-width: 150px;
 }
 
-.fault{background-color: #660099; font-weight: bold; font-size: 12px; color: white;}
-.noFault{background-color:	#33CC66; font-weight: bold; font-size: 12px;}
-
+.fault{background-color:coral; font-weight: bold;}
+.noFault{background-color:	#33CC66; font-weight: bold;}
+.weekend{background-color: whitesmoke; font-weight: bold;}
+.today{background-color: lightsteelblue;}
+.active{background-color: gainsboro;}
 .form-inline {
   padding: 0 rem;
   padding-top: 1.5rem
@@ -121,7 +123,7 @@ tbody {
  table td,
  th {
      white-space: nowrap;
-     font-size: 0.75rem;
+     /* font-size: 0.75rem; */
  }
 
  .tabledit-input:disabled {

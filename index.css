@@ -1,28 +1,14 @@
-.container {
-    max-height: 50vh;
-}
-
-.myTable {
-    word-wrap: break-word; 
-    table-layout:fixed;
-    width: 100%;
-}
-
 .myTable td, 
 .myTable th{
     padding: 0.1rem;
-    font-size: 0.3rem;
+    font-size: 0.46rem;
+    /* word-wrap: break-word; */
+    white-space: nowrap;
+}
+
+.mytable {
+    white-space: nowrap;
     word-wrap: break-word;
-}
-
-.col-lg-5,
-.col-lg-7 {
-    padding: 0.1rem;
-}
-
-.table td,
-.table th{
-     padding: 0.25rem;  
 }
 
 .card{
@@ -31,4 +17,8 @@
 
 .webPlugin{
     margin: 0;
+}
+
+.container-fluid {
+    margin-top: 0;
 }
