@@ -1,14 +1,14 @@
 .myTable td, 
 .myTable th{
     padding: 0.1rem;
-    font-size: 0.46rem;
-    /* word-wrap: break-word; */
+    font-size: 0.53rem;
     white-space: nowrap;
 }
 
 .mytable {
     white-space: nowrap;
     word-wrap: break-word;
+    width: auto;
 }
 
 .card{

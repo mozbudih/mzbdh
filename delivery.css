@@ -33,9 +33,9 @@ body {
     max-width: 150px;
 }
 
-.table {
+.table{
   /* table-layout: auto; */
-  width: 100%;
+  width: auto;
 }
 
 .table td,
@@ -44,6 +44,10 @@ body {
   padding: 0.2rem;
   border-bottom-color: #ccc;
   font-size: 0.9rem;
+}
+
+.table td{
+  width: 4rem;
 }
 
 .card .card-header {
