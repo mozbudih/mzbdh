@@ -1,13 +1,13 @@
 let tbl = document.getElementById("dateRow"); // body of the calendar
 
-let rows = ['EvdW', 'JoSe', 'CdK', 'RdBr', 'JSi', 'MBH', 'NvS', 'AW', 'HR', 'KHu', 'PV', 'DH', 'JvB', 'AnS', 'RRi', 'GL', 'DvdZ', 'PMo', 'HP', 'JCo', 'HvB'];
+let rows = ['EvdW', 'JoSe', 'CdK', 'RdBr', 'JSi', 'MBH', 'NvS', 'AW', 'HR', 'KHu', 'PV', 'DH', 'JvB', 'AnS', 'RRi', 'GL', 'DvdZ', 'PMo', 'HP', 'JC', 'HvB', 'HL'];
 
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectYear = document.getElementById("year");
 let selectMonth = document.getElementById("month");
- 
+
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 let monthAndYear = document.getElementById("monthAndYear");
@@ -31,27 +31,24 @@ function jump() {
     drawTable(currentMonth, currentYear);
 }
 
-function drawTable (month, year) {
+function drawTable(month, year) {
+    
     // Remove shits
     $('#dateRow').nextAll().remove();
 
-    // alert(String(year) + String(month));
+    //populate month and year
+    monthAndYear.innerHTML = months[month] + " " + year;
+
+    // find how many days in month
     let daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-    monthAndYear.innerHTML = months[month] + " " + year;
-    // selectYear.value = year;
-    // selectMonth.value = month;
-
-    // tbl.innerHTML = "";
-    // let row;
+    // Create date cells
     for (date = daysInMonth; date >= 1; date--) {
         let cell = document.createElement('td');
         let cellText = document.createTextNode(String(date));
         cell.appendChild(cellText);
-        // row += cell;
         tbl.after(cell);
     };
-    // tbl.after(row);
 
     rows.forEach(function (item) {
         let mother = document.getElementById(String(item));
@@ -59,55 +56,43 @@ function drawTable (month, year) {
         $('#' + item).nextAll().remove();
 
         for (date = daysInMonth; date >= 1; date--) {
-           
+
+            //Create cells
             let cell = document.createElement('td');
-            cell.setAttribute('id', String(item) + String(year) + String(month) + String(date) );
+            cell.setAttribute('id', String(item) + String(year) + String(month) + String(date));
+            cell.classList.add('text-center')
             let cellText = document.createTextNode("");
             cell.appendChild(cellText);
             mother.after(cell);
 
+            // Weekend shades
+            let dayDate = new Date(year, month, date).getDay();
+            if (dayDate == 6 || dayDate == 0) {
+                cell.classList.add('weekend');
+            }
+
             var indLocStrg = localStorage.getItem(cell.getAttribute("id"));
-            let dayDate = new Date(year,month,date).getDay();
-            if (dayDate == 6 || dayDate == 0)     {
-                cell.setAttribute('class', 'weekend');
+            if (indLocStrg !== null) {
+                switch (indLocStrg) {
+                    case '1':
+                        cell.classList.add('half-ochtend')
+                        cell.innerHTML = '<img src="img/am.png" height="20px" onClick="showDropList(' + cell.getAttribute("id") + ')"/>';
+                        break;
+                    case '2':
+                        cell.classList.add('half-middag');
+                        cell.innerHTML = '<img src="img/pm.png" height="20px"/>';
+                        break;
+                    case '3':
+                        cell.classList.add('ziek');
+                        cell.innerHTML = '<img src="img/pharmacy.png" height="16px"/>';
+                        break;
+                    default:
+                        cell.classList.add('vrij')
+                        cell.innerHTML = '<img src="img/sun-umbrella.png" height="20px"/>';
+                }
             }
-            if(indLocStrg !== null) {
-                if (indLocStrg == '1') {
-                    cell.setAttribute('class', 'half-ochtend');
-                }
-                else if(indLocStrg == '2') {
-                    cell.setAttribute('class', 'half-middag')
-                }
-                else {
-                    cell.setAttribute('class', 'vrij');
-                }
-            }
-            // else {
-            //     cell.setAttribute('class', 'aanwezig');
-            // }
 
-            // if (year <= today.getFullYear() && month <= today.getMonth() && date < today.getDate()) {
-            //     // cell.setAttribute('onClick', 'showDropList("'+cell.getAttribute("id")+'")');
-
-            //     if(localStorage.getItem(cell.id) !== null) {
-            //         cell.setAttribute('class', 'vrij');
-            //     }
-            //     else {
-            //         cell.setAttribute('class', 'aanwezig');
-            //     }
-            // }
-            // else if (year < today.getFullYear() || month < today.getMonth()) {
-            //     // cell.setAttribute('onClick', 'showDropList("'+cell.getAttribute("id")+'")');
-
-            //     if(localStorage.getItem(cell.getAttribute("id")) !== null) {
-            //         cell.setAttribute('class', 'vrij');
-            //     }
-            //     else {
-            //         cell.setAttribute('class', 'aanwezig');
-            //     }
-            // }
-
-            cell.setAttribute('onClick', 'showDropList("'+cell.getAttribute("id")+'")');
+            cell.setAttribute('onClick', 'showDropList("' + cell.getAttribute("id") + '")');
 
             var drdList = document.createElement("div");
             drdList.setAttribute('id', 'drop' + String(cell.getAttribute('id')));
@@ -115,33 +100,36 @@ function drawTable (month, year) {
             var link = document.createElement('a');
             link.setAttribute('href', '#');
             link.setAttribute('class', 'vrij');
-            link.setAttribute('onClick', 'setFault("'+cell.getAttribute("id")+'")');
-            // link.onclick = setFault(String(cell.id));
+            link.setAttribute('onClick', 'setFault("' + cell.getAttribute("id") + '")');
             link.innerText = "Vrij boeken";
             drdList.appendChild(link);
-            
+
             var link = document.createElement('a');
             link.setAttribute('href', '#');
             link.setAttribute('class', 'half-ochtend');
-            link.setAttribute('onClick', 'setHalfOchtend("'+cell.getAttribute("id")+'")');
-            // link.onclick = setNoFault(String(cell.id));
+            link.setAttribute('onClick', 'setHalfOchtend("' + cell.getAttribute("id") + '")');
             link.innerText = "Ochtend vrij";
             drdList.appendChild(link);
 
             var link = document.createElement('a');
             link.setAttribute('href', '#');
             link.setAttribute('class', 'half-middag');
-            link.setAttribute('onClick', 'setHalfMiddag("'+cell.getAttribute("id")+'")');
-            // link.onclick = setNoFault(String(cell.id));
+            link.setAttribute('onClick', 'setHalfMiddag("' + cell.getAttribute("id") + '")');
             link.innerText = "Middag vrij";
             drdList.appendChild(link);
 
             var link = document.createElement('a');
             link.setAttribute('href', '#');
+            link.setAttribute('class', 'ziek');
+            link.setAttribute('onClick', 'setZiek("' + cell.getAttribute("id") + '")');
+            link.innerText = "Ziek";
+            drdList.appendChild(link);
+
+            var link = document.createElement('a');
+            link.setAttribute('href', '#');
             link.setAttribute('class', 'aanwezig');
-            link.setAttribute('onClick', 'setNoFault("'+cell.getAttribute("id")+'")');
-            // link.onclick = setNoFault(String(cell.id));
-            link.innerText = "Verwijder vrij boeking";
+            link.setAttribute('onClick', 'setNoFault("' + cell.getAttribute("id") + '")');
+            link.innerText = "Verwijder boeking";
             drdList.appendChild(link);
 
             cell.appendChild(drdList);
@@ -154,43 +142,45 @@ function drawTable (month, year) {
 }
 
 function showDropList(id) {
-// console.log('a');
-
-    if(! $('#drop' + id).hasClass('show')) {
+    if (!$('#drop' + id).hasClass('show')) {
         $('.dropdown-content.show').removeClass('show');
     }
-
     $('#drop' + id).toggleClass('show');
-
-    // console.log(String(id));
-    // document.getElementById('drop'+ id).classList.addClass("show");
 }
 
 function setNoFault(id) {
-    console.log('nofault');
-    // alert(String(id));
- 
-      localStorage.removeItem(id);
-      document.getElementById(id).setAttribute('class', 'aanwezig');
-    
+    // console.log('nofault');
+    localStorage.removeItem(id);
+    document.getElementById(id).setAttribute('class', 'aanwezig');
+    drawTable(currentMonth, currentYear);
 }
 
 function setFault(id) {
     // alert(String(id));
     localStorage.setItem(id, '');
     document.getElementById(id).setAttribute('class', 'vrij');
+    drawTable(currentMonth, currentYear);
 }
 
 function setHalfOchtend(id) {
     // alert(String(id));
     localStorage.setItem(id, '1');
     document.getElementById(id).setAttribute('class', 'half-ochtend');
-}
+    drawTable(currentMonth, currentYear);
+}   
 
 function setHalfMiddag(id) {
     // alert(String(id));
     localStorage.setItem(id, '2');
     document.getElementById(id).setAttribute('class', 'half-middag');
+    drawTable(currentMonth, currentYear);
+}
+
+function setZiek(id) {
+    // alert(String(id));
+    localStorage.setItem(id, '3');
+    document.getElementById(id).setAttribute('class', 'ziek');
+    drawTable(currentMonth, currentYear);
 }
 
 //   window.onclick = function(event) {
@@ -206,19 +196,19 @@ function setHalfMiddag(id) {
 //     }
 //   }
 
-function exportJson(){
+function exportJson() {
     const btn = document.getElementById('btn-export');
 
     const filename = today.toISOString() + '.json';
     const jsonStr = JSON.stringify(localStorage, null, 4);
-    
+
     btn.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonStr));
     btn.setAttribute('download', filename);
 
     btn.click();
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (!event.target.matches('td')) {
         $('.dropdown-content.show').removeClass('show');
     }

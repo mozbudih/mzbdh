@@ -38,7 +38,6 @@ function drawTable (month, year) {
 
     // console.log("Month: " + month);
     // Remove shits
-    // $('#dateRow').nextAll().remove();
     $('#dateRow').nextAll().remove();
 
     // console.log()
