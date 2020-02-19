@@ -32,7 +32,7 @@ function jump() {
 }
 
 function drawTable(month, year) {
-    
+
     // Remove shits
     $('#dateRow').nextAll().remove();
 
@@ -61,9 +61,9 @@ function drawTable(month, year) {
             let cell = document.createElement('td');
             cell.setAttribute('id', String(item) + String(year) + String(month) + String(date));
             cell.classList.add('text-center')
-            let cellText = document.createTextNode("");
-            cell.appendChild(cellText);
             mother.after(cell);
+
+            cell.setAttribute('onClick', 'showDropList("' + cell.getAttribute("id") + '")');
 
             // Weekend shades
             let dayDate = new Date(year, month, date).getDay();
@@ -76,23 +76,34 @@ function drawTable(month, year) {
                 switch (indLocStrg) {
                     case '1':
                         cell.classList.add('half-ochtend')
-                        cell.innerHTML = '<img src="img/am.png" height="20px" onClick="showDropList(' + cell.getAttribute("id") + ')"/>';
+                        var icon = document.createElement("IMG");
+                        icon.setAttribute('src', 'img/am.png');
+                        icon.setAttribute('height', '20px');
+                        cell.appendChild(icon);
                         break;
                     case '2':
                         cell.classList.add('half-middag');
-                        cell.innerHTML = '<img src="img/pm.png" height="20px"/>';
+                        var icon = document.createElement("IMG");
+                        icon.setAttribute('src', 'img/pm.png');
+                        icon.setAttribute('height', '20px');
+                        cell.appendChild(icon);
                         break;
                     case '3':
                         cell.classList.add('ziek');
-                        cell.innerHTML = '<img src="img/pharmacy.png" height="16px"/>';
+                        var icon = document.createElement("IMG");
+                        icon.setAttribute('src', 'img/pharmacy.png');
+                        icon.setAttribute('height', '20px');
+                        cell.appendChild(icon);
                         break;
                     default:
-                        cell.classList.add('vrij')
-                        cell.innerHTML = '<img src="img/sun-umbrella.png" height="20px"/>';
+                        cell.classList.add('vrij');
+                        var icon = document.createElement("IMG");
+                        icon.setAttribute('src', 'img/sun-umbrella.png');
+                        icon.setAttribute('height', '20px');
+                        cell.appendChild(icon);
                 }
             }
 
-            cell.setAttribute('onClick', 'showDropList("' + cell.getAttribute("id") + '")');
 
             var drdList = document.createElement("div");
             drdList.setAttribute('id', 'drop' + String(cell.getAttribute('id')));
@@ -142,6 +153,7 @@ function drawTable(month, year) {
 }
 
 function showDropList(id) {
+    console.log('show');
     if (!$('#drop' + id).hasClass('show')) {
         $('.dropdown-content.show').removeClass('show');
     }
@@ -167,7 +179,7 @@ function setHalfOchtend(id) {
     localStorage.setItem(id, '1');
     document.getElementById(id).setAttribute('class', 'half-ochtend');
     drawTable(currentMonth, currentYear);
-}   
+}
 
 function setHalfMiddag(id) {
     // alert(String(id));
@@ -209,7 +221,9 @@ function exportJson() {
 }
 
 window.onclick = function (event) {
-    if (!event.target.matches('td')) {
+    if (event.target.matches('td') || event.target.matches('IMG')) {
+    }
+    else {
         $('.dropdown-content.show').removeClass('show');
     }
 }
